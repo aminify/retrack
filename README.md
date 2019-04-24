@@ -1,5 +1,5 @@
 # redux-trackreducers
-combines your reducers in a way that you can dynamically get your reducer's corresponding value without hardcoding the path from state
+a Redux library that tracks the way your reducers are combined to dynamically create a selector for each reducer
 
 ## Installation
 ```
