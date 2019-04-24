@@ -1,22 +1,23 @@
-# redux-trackreducers
+# Retrack
 a Redux library that tracks the way your reducers are combined to dynamically create a selector for each reducer
+works great with [Reselect](https://github.com/reduxjs/reselect/)
 
 ## Installation
 ```
-yarn add redux-trackreducers
+yarn add retrack
 ```
 or
 ```
-npm install --save redux-trackreducers
+npm install --save retrack
 ```
 
 ## Import
 ```javascript
 // ES2015
-import combineTrackReducers from 'redux-trackreducers'
+import combineTrackReducers from 'retrack'
 
 // CommonJS
-var combineTrackReducers = require('redux-trackreducers').default
+var combineTrackReducers = require('retrack').default
 ```
 
 ## Usage
@@ -25,7 +26,7 @@ just use `combineTrackReducers` instead of redux's `combineReducers` everywhere 
 ## Example
 ```javascript
 import { createStore } from 'redux'
-import combineTrackReducers from 'redux-trackreducers'
+import combineTrackReducers from 'retrack'
 
 function counter(state = 0, action) {
   switch (action.type) {

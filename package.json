@@ -1,10 +1,10 @@
 {
-  "name": "redux-trackreducers",
+  "name": "retrack",
   "version": "0.0.1",
-  "description": "combines your reducers in a way that you can dynamically get your reducer's corresponding value without hardcoding the path from state",
+  "description": "never hardcode paths to redux state again!",
   "main": "index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/aminify/redux-trackreducers",
+  "repository": "https://github.com/aminify/retrack",
   "author": "Aminify",
   "license": "MIT",
   "private": false,
