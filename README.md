@@ -1,6 +1,6 @@
 # Retrack
-a Redux library that tracks the way your reducers are combined to dynamically create a selector for each reducer
-works great with [Reselect](https://github.com/reduxjs/reselect/)
+a Redux library that tracks the way your reducers are combined to dynamically create a selector for each reducer.  
+try to use with [Reselect](https://github.com/reduxjs/reselect/) for best development experience.
 
 ## Installation
 ```
@@ -61,14 +61,14 @@ const store = createStore(
 )
 
 const state = store.getState()
-console.log(counter.valueIn(state)) // 0
-console.log(name.valueIn(state)) // default name
-console.log(firstApp.valueIn(state)) // {counter: 0, name: "default name"}
+console.log(counter.valueIn(state))   // 0
+console.log(name.valueIn(state))      // default name
+console.log(firstApp.valueIn(state))  // {counter: 0, name: "default name"}
 console.log(secondApp.valueIn(state)) // under construction
 
 store.dispatch({ type: 'INCREMENT' })
 console.log(counter.valueIn(store.getState())) // 1
 
 store.dispatch({ type: 'SET_NAME', payload: { name: 'another name' } })
-console.log(name.valueIn(store.getState())) // another name
+console.log(name.valueIn(store.getState()))    // another name
 ```
