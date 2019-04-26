@@ -1,6 +1,6 @@
 {
   "name": "retrack",
-  "version": "0.1.",
+  "version": "0.1.0",
   "description": "never hardcode paths to redux state again!",
   "main": "dist/cjs/retrack.js",
   "module": "dist/es/retrack.js",
