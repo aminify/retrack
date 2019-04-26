@@ -1,14 +1,30 @@
 {
   "name": "retrack",
-  "version": "0.0.1",
+  "version": "0.1.",
   "description": "never hardcode paths to redux state again!",
-  "main": "index.js",
-  "module": "es/index.js",
+  "main": "dist/cjs/retrack.js",
+  "module": "dist/es/retrack.js",
   "repository": "https://github.com/aminify/retrack",
   "author": "Aminify",
   "license": "MIT",
   "private": false,
   "dependencies": {
     "redux": ">=0.10 <5"
-  }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "rollup": "^1.10.1",
+    "rollup-plugin-babel": "^4.3.2"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w"
+  },
+  "keywords": [
+    "retrack",
+    "redux",
+    "reducer",
+    "selector"
+  ]
 }
