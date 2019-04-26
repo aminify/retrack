@@ -1,33 +1,34 @@
 # Retrack
-a Redux library that tracks the way your reducers are combined to dynamically create a selector for each reducer.  
+A simple Redux library that tracks the way your reducers are combined to dynamically create a selector for each reducer.  
 try to use with [Reselect](https://github.com/reduxjs/reselect/) for best development experience.
 
 ## Installation
 ```
-yarn add retrack
+$ yarn add retrack
 ```
 or
 ```
-npm install --save retrack
+$ npm install --save retrack
 ```
 
 ## Import
 ```javascript
 // ES2015
-import combineTrackReducers from 'retrack'
+import { combineTrackReducers, getSelector } from 'retrack'
 
 // CommonJS
-var combineTrackReducers = require('retrack').default
+const { combineTrackReducers, getSelector } = require('retrack')
 ```
 
 ## Usage
-just use `combineTrackReducers` instead of redux's `combineReducers` everywhere in your project and you'll get a free `.valueIn` function on each of your reducers that maps the giant redux state of your application into the state value that the corresponding reducer controls.
+just use `combineTrackReducers` instead of redux's `combineReducers` everywhere in your project and you'll get a free selector by applying `getSelector` on each of your reducers. A selector maps the giant redux state of your application into the state value that the corresponding reducer controls.
 
 ## Example
 ```javascript
 import { createStore } from 'redux'
-import combineTrackReducers from 'retrack'
+import { combineTrackReducers, getSelector } from 'retrack'
 
+// define your reducers and setup store
 function counter(state = 0, action) {
   switch (action.type) {
     case 'INCREMENT':
@@ -55,20 +56,29 @@ function secondApp(state = 'under construction', action) {
 
 const store = createStore(
   combineTrackReducers({
-    firstApp: firstApp,
-    secondApp: secondApp
+    firstAppName: firstApp,
+    secondAppName: secondApp
   })
 )
 
+// later when you want to get values from state
 const state = store.getState()
-console.log(counter.valueIn(state))   // 0
-console.log(name.valueIn(state))      // default name
-console.log(firstApp.valueIn(state))  // {counter: 0, name: "default name"}
-console.log(secondApp.valueIn(state)) // under construction
+
+const counterSelector = getSelector(counter) /* equivalent to `(state) => state.firstAppName.counter` */
+console.log(counterSelector(state))        // 0
+
+const nameSelector = getSelector(name) /* equivalent to `(state) => state.firstAppName.name` */
+console.log(nameSelector(state))           // default name
+
+console.log(getSelector(firstApp)(state))  // {counter: 0, name: "default name"}
+
+console.log(getSelector(secondApp)(state)) // under construction
+
+// ...
 
 store.dispatch({ type: 'INCREMENT' })
-console.log(counter.valueIn(store.getState())) // 1
+console.log(counterSelector(store.getState())) // 1
 
 store.dispatch({ type: 'SET_NAME', payload: { name: 'another name' } })
-console.log(name.valueIn(store.getState()))    // another name
+console.log(nameSelector(store.getState()))    // another name
 ```
