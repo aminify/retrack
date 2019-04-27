@@ -1,6 +1,6 @@
 {
   "name": "retrack",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "never hardcode paths to redux state again!",
   "main": "dist/cjs/retrack.js",
   "module": "dist/es/retrack.js",
@@ -9,7 +9,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "redux": ">=0.10 <5"
+    "redux": ">=1.0.0 <5"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
