@@ -31,7 +31,7 @@ const { ... } = require('retrack')
 
 ## Public API
 ### combineTrackReducers(`reducers`)
-You should use this function instead of redux's default `combineReducers` function everywhere in your project so Retrack knows the shape of your state tree in order to give you the functionality that you're looking for. It internally calls `combineReducers` from your own version of redux and returns the same result, except that it also does some extra stuff for tracking. note that `reducers` must be an object just like redux's `combineReducers` with string keys and your reducers as values.
+You should use this function instead of redux's default `combineReducers` everywhere in your project so Retrack knows the shape of your state tree in order to give you the functionality that you're looking for. It internally calls `combineReducers` from your own version of redux and returns the same result, except that it also does some extra stuff for tracking. note that `reducers` must be an object with string keys and your reducers as values.
 
 ### getSelector(`reducer`)
 You can use `getSelector` on any of your reducers (which of course you passed to `combineTrackReducers` at some point) to get a selector function. This selector maps the giant redux state of your application into the state value that the corresponding reducer controls.
