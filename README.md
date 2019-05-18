@@ -37,7 +37,7 @@ You should use this function instead of redux's default `combineReducers` everyw
 You can use `getSelector` on any of your reducers (which of course you passed to `combineTrackReducers` at some point) to get a selector function. This selector maps the giant redux state of your application into the state value that the corresponding reducer controls.
 
 ### namespaceReducerActions(`reducer`, `actionTypes`)
-By calling this function you tell Retrack to namespace your `actionTypes` based on the position of `reducer` in the state tree. if you want this feature you MUST use the pattern in the example below, which is to pass an `actionTypes` object, a key value pair that values are string values you wish to use as action type and use `actionTypes.ACTION_TYPE` Whenever you want to refer to an action type (in reducer or action creator). hope the example below clarifies more.
+By calling this function you tell Retrack to namespace your `actionTypes` based on the position of `reducer` in the state tree. if you want this feature you MUST use the pattern in the example below, which is to pass an `actionTypes` object, a key value pair that values are string values you wish to use as action type and use `actionTypes.ACTION_TYPE` whenever you want to refer to an action type (in reducer or action creator). hope the example below clarifies more.
 
 ### setNamespacingFunction(`customFunction`)
 You can customize the logic of namespacing your action types by passing your `customFunction` here. Your function will get an array of strings and should return your custom action type. The array of strings given to your function will be the strings indicating the path of reducer in the state tree as well as the action type itself as the last value. If you don't call this function, `(strArr) => strArr.join('/')` will be used by default.
@@ -107,17 +107,17 @@ console.log(getSelector(secondApp)(state))     // under construction
 
 // ...
 
-console.log(counterActionTypes.INCREMENT)          // firstAppName/counter/INCREMENT
+console.log(counterActionTypes.INCREMENT)      // firstAppName/counter/INCREMENT
 store.dispatch({ type: counterActionTypes.INCREMENT })
 console.log(counterSelector(store.getState())) // 1
 
-console.log(nameActionTypes.SET_NAME)              // firstAppName/name/SET_NAME
+console.log(nameActionTypes.SET_NAME)          // firstAppName/name/SET_NAME
 store.dispatch({ type: nameActionTypes.SET_NAME, payload: { name: 'another name' } })
 console.log(nameSelector(store.getState()))    // another name
 
 // you should probably use this when you setup your store, It's here just for the example
-setNamespacingFunction((strArr) => strArr.join('{}'))
-console.log(nameActionTypes.SET_NAME)              // firstAppName{}name{}SET_NAME
+setNamespacingFunction((strArr) => strArr.join('-> '))
+console.log(nameActionTypes.SET_NAME)          // firstAppName-> name-> SET_NAME
 ```
 As you have noticed action types like `counterAction.INCREMENT` are no longer the strings you passed to `namespaceReducerActions` at first. Retrack behind the scene overrides the action names to be getter functions that produce namespaced action name dynamically based on your state tree.
 And that's why you must stick to this pattern. If you hardcode an action name by mistake, or capture the value at some point during setup and reuse that value, you'll lose this dynamically namespacing feature.
